@@ -1,0 +1,9 @@
+{
+	"name": "arunamitgit",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "581a3777-f32d-4bef-ab07-22d88e2ad74d",
+		"tenantId": "549ec55c-d40a-4cce-883d-36505dd5814c"
+	}
+}
