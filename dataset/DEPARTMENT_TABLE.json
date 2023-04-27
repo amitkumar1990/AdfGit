@@ -1,0 +1,37 @@
+{
+	"name": "DEPARTMENT_TABLE",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DatasetAzureSQL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "DEPTID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "DNAME",
+				"type": "varchar"
+			},
+			{
+				"name": "MANAGERID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "LOCATIONID",
+				"type": "bigint",
+				"precision": 19
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "DEPARTMENT"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,71 @@
+{
+	"name": "AzureSqlTable1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DatasetAzureSQL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "EMPLOYEE_ID",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "FIRST_NAME",
+				"type": "varchar"
+			},
+			{
+				"name": "LAST_NAME",
+				"type": "varchar"
+			},
+			{
+				"name": "EMAIL",
+				"type": "varchar"
+			},
+			{
+				"name": "PHONE_NUMBER",
+				"type": "varchar"
+			},
+			{
+				"name": "HIRE_DATE",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "JOB_ID",
+				"type": "varchar"
+			},
+			{
+				"name": "SALARY",
+				"type": "decimal",
+				"precision": 8,
+				"scale": 2
+			},
+			{
+				"name": "COMMISSION_PCT",
+				"type": "decimal",
+				"precision": 2,
+				"scale": 2
+			},
+			{
+				"name": "MANAGER_ID",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "DEPARTMENT_ID",
+				"type": "float",
+				"precision": 15
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Employees"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

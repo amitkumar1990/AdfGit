@@ -1,0 +1,195 @@
+{
+	"name": "adfcdc1",
+	"properties": {
+		"SourceConnectionsInfo": [
+			{
+				"SourceEntities": [
+					{
+						"name": "dbo.EMPLOYEES",
+						"properties": {
+							"schema": [],
+							"dslConnectorProperties": [
+								{
+									"name": "schemaName",
+									"value": "dbo"
+								},
+								{
+									"name": "tableName",
+									"value": "EMPLOYEES"
+								},
+								{
+									"name": "enableCdc",
+									"value": true
+								},
+								{
+									"name": "waterMarkColumn",
+									"value": "HIRE_DATE"
+								}
+							]
+						}
+					}
+				],
+				"Connection": {
+					"linkedService": {
+						"referenceName": "DatasetAzureSQL",
+						"type": "LinkedServiceReference"
+					},
+					"linkedServiceType": "AzureSqlDatabase",
+					"type": "linkedservicetype",
+					"isInlineDataset": true,
+					"commonDslConnectorProperties": [
+						{
+							"name": "allowSchemaDrift",
+							"value": true
+						},
+						{
+							"name": "inferDriftedColumnTypes",
+							"value": true
+						},
+						{
+							"name": "format",
+							"value": "table"
+						},
+						{
+							"name": "store",
+							"value": "sqlserver"
+						},
+						{
+							"name": "databaseType",
+							"value": "databaseType"
+						},
+						{
+							"name": "database",
+							"value": "database"
+						},
+						{
+							"name": "skipInitialLoad",
+							"value": true
+						}
+					]
+				}
+			}
+		],
+		"TargetConnectionsInfo": [
+			{
+				"TargetEntities": [
+					{
+						"name": "dbo.EMPLOYEES",
+						"properties": {
+							"schema": [],
+							"dslConnectorProperties": [
+								{
+									"name": "schemaName",
+									"value": "dbo"
+								},
+								{
+									"name": "tableName",
+									"value": "EMPLOYEES"
+								}
+							]
+						}
+					},
+					{
+						"name": "dbo.DIM_EMPLOYEES",
+						"properties": {
+							"schema": [],
+							"dslConnectorProperties": [
+								{
+									"name": "schemaName",
+									"value": "dbo"
+								},
+								{
+									"name": "tableName",
+									"value": "DIM_EMPLOYEES"
+								}
+							]
+						}
+					}
+				],
+				"Connection": {
+					"linkedService": {
+						"referenceName": "DatasetAzureSQL",
+						"type": "LinkedServiceReference"
+					},
+					"linkedServiceType": "AzureSqlDatabase",
+					"type": "linkedservicetype",
+					"isInlineDataset": true,
+					"commonDslConnectorProperties": [
+						{
+							"name": "allowSchemaDrift",
+							"value": true
+						},
+						{
+							"name": "inferDriftedColumnTypes",
+							"value": true
+						},
+						{
+							"name": "format",
+							"value": "table"
+						},
+						{
+							"name": "store",
+							"value": "sqlserver"
+						},
+						{
+							"name": "databaseType",
+							"value": "databaseType"
+						},
+						{
+							"name": "database",
+							"value": "database"
+						},
+						{
+							"name": "deletable",
+							"value": false
+						},
+						{
+							"name": "insertable",
+							"value": true
+						},
+						{
+							"name": "updateable",
+							"value": false
+						},
+						{
+							"name": "upsertable",
+							"value": false
+						},
+						{
+							"name": "skipDuplicateMapInputs",
+							"value": true
+						},
+						{
+							"name": "skipDuplicateMapOutputs",
+							"value": true
+						}
+					]
+				},
+				"DataMapperMappings": [
+					{
+						"targetEntityName": "dbo.DIM_EMPLOYEES",
+						"sourceEntityName": "dbo.EMPLOYEES",
+						"sourceConnectionReference": {
+							"connectionName": "DatasetAzureSQL",
+							"type": "linkedservicetype"
+						},
+						"attributeMappingInfo": {
+							"attributeMappings": []
+						}
+					}
+				],
+				"Relationships": []
+			}
+		],
+		"Policy": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 15
+			},
+			"mode": "Microbatch"
+		},
+		"status": "Stopped",
+		"allowVNetOverride": false,
+		"id": "751d717ae5cd43fca07c29919f8c5824"
+	}
+}
