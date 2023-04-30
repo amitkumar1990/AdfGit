@@ -1,0 +1,9 @@
+{
+	"name": "aruntomar0810-df",
+	"location": "eastus2",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "88154802-36a6-4d2d-a7c9-9042d444e979",
+		"tenantId": "549ec55c-d40a-4cce-883d-36505dd5814c"
+	}
+}
