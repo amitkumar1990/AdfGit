@@ -16,11 +16,11 @@
 				"userProperties": [
 					{
 						"name": "Source",
-						"value": "adfdemo//"
+						"value": "adfdemo/"
 					},
 					{
 						"name": "Destination",
-						"value": "adfdemo/output/DIM"
+						"value": "adfdemo/output/"
 					}
 				],
 				"typeProperties": {
