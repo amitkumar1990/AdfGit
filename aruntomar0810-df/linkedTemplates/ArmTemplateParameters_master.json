@@ -11,6 +11,9 @@
 		"AzureSqlDatabase1_connectionString": {
 			"value": ""
 		},
+		"ORACLE_HR_connectionString": {
+			"value": ""
+		},
 		"containerUri": {
 			"value": ""
 		},
