@@ -15,7 +15,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "Json1",
+						"referenceName": "DelimitedText2",
 						"type": "DatasetReference"
 					},
 					"name": "blobtgt"
@@ -43,6 +43,9 @@
 				"     skipLines: 1) ~> blobstorage",
 				"blobstorage sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     input(",
+				"          Column_1 as string",
+				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> blobtgt"
 			]
