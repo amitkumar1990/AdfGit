@@ -9,57 +9,36 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "EMPLOYEE_ID",
-				"type": "float",
-				"precision": 15
+				"name": "skey",
+				"type": "bigint",
+				"precision": 19
 			},
 			{
-				"name": "FIRST_NAME",
+				"name": "empid",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "fname",
 				"type": "varchar"
 			},
 			{
-				"name": "LAST_NAME",
+				"name": "lname",
 				"type": "varchar"
 			},
 			{
-				"name": "EMAIL",
+				"name": "city",
 				"type": "varchar"
 			},
 			{
-				"name": "PHONE_NUMBER",
-				"type": "varchar"
-			},
-			{
-				"name": "HIRE_DATE",
+				"name": "d_date",
 				"type": "datetime",
 				"precision": 23,
 				"scale": 3
 			},
 			{
-				"name": "JOB_ID",
-				"type": "varchar"
-			},
-			{
-				"name": "SALARY",
-				"type": "decimal",
-				"precision": 8,
-				"scale": 2
-			},
-			{
-				"name": "COMMISSION_PCT",
-				"type": "decimal",
-				"precision": 2,
-				"scale": 2
-			},
-			{
-				"name": "MANAGER_ID",
-				"type": "float",
-				"precision": 15
-			},
-			{
-				"name": "DEPARTMENT_ID",
-				"type": "float",
-				"precision": 15
+				"name": "actv_ind",
+				"type": "char"
 			}
 		],
 		"typeProperties": {
