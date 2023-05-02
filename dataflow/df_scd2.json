@@ -1,0 +1,78 @@
+{
+	"name": "df_scd2",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "emp_source",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_dim_employee_2",
+						"type": "DatasetReference"
+					},
+					"name": "TgtAzuredimemp"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "select1"
+				},
+				{
+					"name": "Sourcehash"
+				},
+				{
+					"name": "dimemployee"
+				},
+				{
+					"name": "FltActvRcrds"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          empid as short,",
+				"          ename as string,",
+				"          lname as string,",
+				"          city as string,",
+				"          startdate as date",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source(output(",
+				"          skey as long,",
+				"          empid as long,",
+				"          fname as string,",
+				"          lname as string,",
+				"          city as string,",
+				"          d_date as timestamp,",
+				"          actv_ind as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> TgtAzuredimemp",
+				"source1 select(mapColumn(",
+				"          empid,",
+				"          ename,",
+				"          lname,",
+				"          city,",
+				"          startdate",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 derive(srhash = md5(ename,lname)) ~> Sourcehash",
+				"Sourcehash exists(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
+				"     negate:false,",
+				"     broadcast: 'auto')~> dimemployee",
+				"TgtAzuredimemp filter(actv_ind=='Y') ~> FltActvRcrds"
+			]
+		}
+	}
+}

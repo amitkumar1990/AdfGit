@@ -64,7 +64,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "EMPLOYEES"
+			"table": "dim_employee_2"
 		}
 	}
 }
