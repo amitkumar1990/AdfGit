@@ -9,7 +9,14 @@
 						"referenceName": "emp_source",
 						"type": "DatasetReference"
 					},
-					"name": "source1"
+					"name": "EmpCsv"
+				},
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable1",
+						"type": "DatasetReference"
+					},
+					"name": "dimemployes"
 				}
 			],
 			"sinks": [
@@ -24,11 +31,23 @@
 			"transformations": [
 				{
 					"name": "Sourcehash"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "lookup1"
+				},
+				{
+					"name": "actvrecords"
+				},
+				{
+					"name": "select2"
 				}
 			],
 			"scriptLines": [
 				"source(output(",
-				"          empid as short,",
+				"          empid as long,",
 				"          ename as string,",
 				"          lname as string,",
 				"          city as string,",
@@ -36,8 +55,48 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> source1",
-				"source1 derive(actv_ind = 1) ~> Sourcehash",
+				"     ignoreNoFilesFound: false) ~> EmpCsv",
+				"source(output(",
+				"          skey as long,",
+				"          empid as long,",
+				"          fname as string,",
+				"          lname as string,",
+				"          city as string,",
+				"          d_date as timestamp,",
+				"          actv_ind as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> dimemployes",
+				"EmpCsv derive(actv_ind = 1) ~> Sourcehash",
+				"dimemployes select(mapColumn(",
+				"          sql_skey = skey,",
+				"          sql_empid = empid,",
+				"          sql_fname = fname,",
+				"          sql_lname = lname,",
+				"          sql_city = city,",
+				"          sql_d_date = d_date,",
+				"          sql_actv_ind = actv_ind",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"EmpCsv, select1 lookup(empid == sql_empid,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> lookup1",
+				"lookup1 filter(!isNull(sql_empid)) ~> actvrecords",
+				"actvrecords select(mapColumn(",
+				"          sql_skey,",
+				"          sql_empid,",
+				"          sql_fname,",
+				"          sql_lname,",
+				"          sql_city,",
+				"          sql_d_date,",
+				"          sql_actv_ind",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select2",
 				"Sourcehash sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
